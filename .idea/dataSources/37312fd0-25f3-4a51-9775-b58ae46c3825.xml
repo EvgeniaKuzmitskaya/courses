@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="electivenew@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="electivenew">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="bond"/>
+    <schema id="4" parent="1" name="department"/>
+    <schema id="5" parent="1" name="development"/>
+    <schema id="6" parent="1" name="elective"/>
+    <schema id="7" parent="1" name="information_schema"/>
+    <schema id="8" parent="1" name="mysql"/>
+    <schema id="9" parent="1" name="performance_schema"/>
+    <schema id="10" parent="1" name="sakila"/>
+    <schema id="11" parent="1" name="shop"/>
+    <schema id="12" parent="1" name="staff"/>
+    <schema id="13" parent="1" name="stockbd"/>
+    <schema id="14" parent="1" name="sys"/>
+    <schema id="15" parent="1" name="world"/>
+    <table id="16" parent="2" name="course"/>
+    <table id="17" parent="2" name="persistent_logins"/>
+    <table id="18" parent="2" name="result"/>
+    <table id="19" parent="2" name="role"/>
+    <table id="20" parent="2" name="user"/>
+    <table id="21" parent="2" name="user_course"/>
+    <table id="22" parent="2" name="user_result"/>
+    <table id="23" parent="2" name="user_role"/>
+    <column id="24" parent="16" name="id_course">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="25" parent="16" name="name_course">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="16" name="date_begin_course">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="16" name="date_end_course">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="16" name="status_course">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="16" name="description_course">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="30" parent="16" name="id_course_UNIQUE">
+      <ColNames>id_course</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="31" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_course</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="32" parent="16" name="id_course_UNIQUE">
+      <ColNames>id_course</ColNames>
+      <UnderlyingIndexName>id_course_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="33" parent="17" name="series">
+      <Position>1</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="17" name="login">
+      <Position>2</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="17" name="token">
+      <Position>3</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="17" name="last_used">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <key id="37" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>series</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="38" parent="18" name="id_result">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="39" parent="18" name="mark_result">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="40" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_result</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="41" parent="19" name="id_role">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="42" parent="19" name="type_role">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="43" parent="19" name="id_role_UNIQUE">
+      <ColNames>id_role</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="44" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_role</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="45" parent="19" name="id_role_UNIQUE">
+      <ColNames>id_role</ColNames>
+      <UnderlyingIndexName>id_role_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="46" parent="20" name="id_user">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="47" parent="20" name="login">
+      <Position>2</Position>
+      <DataType>varchar(70)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="20" name="password">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="49" parent="20" name="firstname">
+      <Position>4</Position>
+      <DataType>varchar(60)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="20" name="lastname">
+      <Position>5</Position>
+      <DataType>varchar(75)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="20" name="email">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="20" name="password_confirm">
+      <Position>7</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <index id="53" parent="20" name="id_user_UNIQUE">
+      <ColNames>id_user</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="54" parent="20" name="login_UNIQUE">
+      <ColNames>login</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="55" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_user</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="56" parent="20" name="id_user_UNIQUE">
+      <ColNames>id_user</ColNames>
+      <UnderlyingIndexName>id_user_UNIQUE</UnderlyingIndexName>
+    </key>
+    <key id="57" parent="20" name="login_UNIQUE">
+      <ColNames>login</ColNames>
+      <UnderlyingIndexName>login_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="58" parent="21" name="id_user">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="21" name="id_course">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="60" parent="21" name="course_user_idx">
+      <ColNames>id_course</ColNames>
+    </index>
+    <index id="61" parent="21" name="user_course_idx">
+      <ColNames>id_user</ColNames>
+    </index>
+    <foreign-key id="62" parent="21" name="user_course">
+      <ColNames>id_user</ColNames>
+      <RefSchemaName>electivenew</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>id_user</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <foreign-key id="63" parent="21" name="course_user">
+      <ColNames>id_course</ColNames>
+      <RefSchemaName>electivenew</RefSchemaName>
+      <RefTableName>course</RefTableName>
+      <RefColNames>id_course</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="64" parent="22" name="id_user">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="22" name="id_result">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="66" parent="22" name="result_user_idx">
+      <ColNames>id_result</ColNames>
+    </index>
+    <index id="67" parent="22" name="user_result_idx">
+      <ColNames>id_user</ColNames>
+    </index>
+    <foreign-key id="68" parent="22" name="user_result">
+      <ColNames>id_user</ColNames>
+      <RefSchemaName>electivenew</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>id_user</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <foreign-key id="69" parent="22" name="result_user">
+      <ColNames>id_result</ColNames>
+      <RefSchemaName>electivenew</RefSchemaName>
+      <RefTableName>result</RefTableName>
+      <RefColNames>id_result</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="70" parent="23" name="id_user">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="23" name="id_role">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="72" parent="23" name="role_user_idx">
+      <ColNames>id_user</ColNames>
+    </index>
+    <index id="73" parent="23" name="user_role_idx">
+      <ColNames>id_role</ColNames>
+    </index>
+    <foreign-key id="74" parent="23" name="role_user">
+      <ColNames>id_user</ColNames>
+      <RefSchemaName>electivenew</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>id_user</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <foreign-key id="75" parent="23" name="user_role">
+      <ColNames>id_role</ColNames>
+      <RefSchemaName>electivenew</RefSchemaName>
+      <RefTableName>role</RefTableName>
+      <RefColNames>id_role</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+  </database-model>
+</dataSource>
