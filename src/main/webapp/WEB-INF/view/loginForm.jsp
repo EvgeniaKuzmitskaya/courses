@@ -15,12 +15,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>LogIn</title>
+    <title>Login</title>
 </head>
 
 <body onload='document.loginForm.username.focus();'>
-<h3>Courses</h3>
-
+<h3 class="text-center">Enter the system</h3>
 <link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextPath}/static/css/common.css" rel="stylesheet">
 
@@ -52,7 +51,7 @@
 <div class="container">
 
     <form method="POST" action="${contextPath}/loginForm" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
+        <%--<h2 class="form-heading">Log in</h2>--%>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
@@ -61,24 +60,21 @@
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input id="remember_me" name="_spring_security_remember_me"
+                   type="checkbox"/> <!-- Флажок "запомнить меня" -->
+            <label for="remember_me"
+                   class="inline">Remember me</label>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
             <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
         </div>
-
     </form>
-
 </div>
+
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/static/js/bootstrap.min.js"></script>
-
-
-
-
-
-
-</body>
+    </body>
 </html>
 
 

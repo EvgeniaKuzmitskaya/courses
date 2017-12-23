@@ -16,7 +16,7 @@ public class RoleServiceImpl implements RoleService{
     RoleDao roleDao;
 
     @Override
-    public Role findById(int id) {
+    public Role findById(Long id) {
         return this.roleDao.findById(id);
     }
 
@@ -37,7 +37,7 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         this.roleDao.deleteById(id);
     }
 

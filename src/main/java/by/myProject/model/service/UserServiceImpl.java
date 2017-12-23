@@ -18,11 +18,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUserName(String userName) {
+
         return this.userDao.findByUserName(userName);
     }
 
     @Override
-    public User findById(int id) {
+    public User findById(Long id) {
+
         return this.userDao.findById(id);
     }
 
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         this.userDao.deleteById(id);
     }
 
@@ -52,13 +54,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUserLoginUnique(Integer id, String userName) {
+    public boolean isUserLoginUnique(Long id, String userName) {
         User user = findByUserName(userName);
         return ( user == null || ((id != null) && (user.getIdUser() == id)));
     }
 
     @Override
+    public List<User> findByRole() {
+        return this.userDao.findByRole();
+    }
+
+    @Override
     public Optional<User> findUser(String login, String password) {
-       return this.userDao.findUser(login,password);
+
+        return this.userDao.findUser(login,password);
     }
 }

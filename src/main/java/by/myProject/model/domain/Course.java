@@ -4,8 +4,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,7 +20,7 @@ public class Course {
     private Date dateEndCourse;
     private String statusCourse;
     private String descriptionCourse;
-    private Set<User> users = new HashSet<User>(0);
+//    private List<User> users = new ArrayList<>(0);
 
     @Id
     @Column(name = "id_course")
@@ -39,8 +43,9 @@ public class Course {
         this.nameCourse = nameCourse;
     }
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "date_begin_course")
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern="dd.MM.yyyy")
     public Date getDateBeginCourse() {
         return dateBeginCourse;
     }
@@ -49,8 +54,9 @@ public class Course {
         this.dateBeginCourse = dateBeginCourse;
     }
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "date_end_course")
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern="dd.MM.yyyy")
     public Date getDateEndCourse() {
         return dateEndCourse;
     }
@@ -79,14 +85,14 @@ public class Course {
         this.descriptionCourse = descriptionCourse;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     @Override
     public boolean equals(Object o) {

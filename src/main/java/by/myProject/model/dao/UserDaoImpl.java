@@ -1,28 +1,35 @@
 package by.myProject.model.dao;
 
+import by.myProject.model.domain.Role;
 import by.myProject.model.domain.User;
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
+public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao{
+
+    @PersistenceContext
+    private EntityManager em;
 
     static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
     @Override
-    public User findById(int id) {
+    public User findById(Long id) {
         User user = (User) getSession().load(User.class, id);
         logger.info("User loaded successfully, User details=" + user);
         return user;
@@ -35,7 +42,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         User user = findById(id);
         if(null != user){
             getSession().delete(user);
@@ -72,11 +79,9 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 
     @Override
     public User findByLastName(String lastName) {
-        CriteriaQuery<User> query = createCriteriaBuilder().createQuery(User.class);
-        Root<User> root = query.from(User.class);
-        query.select(root.get("lastname"));
-        Query<User> q = getSession().createQuery(query);
-        User user = q.getSingleResult();
+        Session session = getSession();
+        Query query = session.createQuery("select u.lastName from User u WHERE u.lastName= :lastName");
+        User user = (User) query.setParameter("lastName", lastName).getSingleResult();
         return user;
     }
 
@@ -101,7 +106,6 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
     @Override
     public Optional<User> findUser(String login, String password) {
         Session session = super.getSession();
-
         String sql = "from User as o where o.userName=? and o.password=?";
         TypedQuery<User> query = session.createQuery(sql);
         query.setParameter(0,login);
@@ -113,6 +117,27 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
             return Optional.empty();
         }
     }
+
+    @Override
+    public List<User> findByRole() {
+
+//        List<User> user = (List<User>)getSession().createSQLQuery(
+//                "SELECT u.lastname " +
+//                 "FROM user as u, user_role as u_r, role as r\n" +
+//                "WHERE u.id_user = u_r.id_user AND r.id_role = u_r.id_role\n" +
+//                "AND r.type_role = 'TEACHER' order by u.lastname")
+//                .addScalar("lastname")
+//                .setResultTransformer(Transformers.aliasToBean(User.class)).list();
+//        return user;
+
+        Session session = super.getSession();
+        Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'TEACHER'");
+//        Query query = session.createQuery("from User");
+        List list = query.list();
+        return list;
+
+    }
+
 
 }
 

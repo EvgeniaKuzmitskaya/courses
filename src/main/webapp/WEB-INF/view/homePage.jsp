@@ -20,10 +20,10 @@
 </head>
 <body>
 <div class="container">
-<a href="${pageContext.request.contextPath}/userPage">JD User</a> |
-<a href="${pageContext.request.contextPath}/adminPage">JD Admin</a>
+<a href="${pageContext.request.contextPath}/userPage">For User</a> |
+<a href="${pageContext.request.contextPath}/adminPage">For Admin</a>
 
-<h3>Welcome to JournalDEV Tutorials</h3>
+<h3>Welcome to Home page!</h3>
 
 <link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextPath}/static/css/common.css" rel="stylesheet">
@@ -31,10 +31,10 @@
 
 
 <ul>
-    <li>Java 8 tutorial</li>
-    <li>Spring tutorial</li>
-    <li>Gradle tutorial</li>
-    <li>BigData tutorial</li>
+    <li>Course</li>
+    <li>Log in</li>
+    <li>Registration</li>
+
 </ul>
 
 <c:url value='/logout' var="logoutUrl" />

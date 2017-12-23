@@ -16,7 +16,7 @@ public class RoleDaoImpl extends AbstractDao<Integer, Role> implements RoleDao{
     static final Logger logger = LoggerFactory.getLogger(RoleDaoImpl.class);
 
     @Override
-    public Role findById(int id) {
+    public Role findById(Long id) {
         Role role = (Role) getSession().load(Role.class, id);
         logger.info("Role loaded successfully, Role details=" + role);
         return role;
@@ -29,7 +29,7 @@ public class RoleDaoImpl extends AbstractDao<Integer, Role> implements RoleDao{
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         Role role = findById(id);
         if(null != role){
             getSession().delete(role);

@@ -36,27 +36,22 @@
     <column id="25" parent="16" name="name_course">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="26" parent="16" name="date_begin_course">
       <Position>3</Position>
       <DataType>date|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="27" parent="16" name="date_end_course">
       <Position>4</Position>
       <DataType>date|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="28" parent="16" name="status_course">
       <Position>5</Position>
       <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="29" parent="16" name="description_course">
       <Position>6</Position>
       <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <index id="30" parent="16" name="id_course_UNIQUE">
       <ColNames>id_course</ColNames>
@@ -263,25 +258,34 @@
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="72" parent="23" name="role_user_idx">
+    <column id="72" parent="23" name="id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <index id="73" parent="23" name="role_user_idx">
       <ColNames>id_user</ColNames>
     </index>
-    <index id="73" parent="23" name="user_role_idx">
+    <index id="74" parent="23" name="user_role_idx">
       <ColNames>id_role</ColNames>
     </index>
-    <foreign-key id="74" parent="23" name="role_user">
+    <key id="75" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="76" parent="23" name="role_user">
       <ColNames>id_user</ColNames>
       <RefSchemaName>electivenew</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>id_user</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <foreign-key id="75" parent="23" name="user_role">
+    <foreign-key id="77" parent="23" name="user_role">
       <ColNames>id_role</ColNames>
       <RefSchemaName>electivenew</RefSchemaName>
       <RefTableName>role</RefTableName>
       <RefColNames>id_role</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
     </foreign-key>
   </database-model>
 </dataSource>

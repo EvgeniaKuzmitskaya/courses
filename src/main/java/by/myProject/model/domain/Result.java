@@ -1,14 +1,16 @@
 package by.myProject.model.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Result {
     private int idResult;
     private int markResult;
-    private Set<User> users = new HashSet<User>(0);
+    private List<User> users = new ArrayList<>(0);
 
 
     @Id
@@ -32,11 +34,11 @@ public class Result {
     }
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "results")
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 

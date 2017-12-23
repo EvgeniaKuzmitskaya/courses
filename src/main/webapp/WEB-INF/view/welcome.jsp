@@ -10,16 +10,29 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="с" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <html>
 <head>
-    <title>Title</title>
+    <title>welcome</title>
 </head>
+
 <body>
-<link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
-<link href="${contextPath}/static/css/common.css" rel="stylesheet">
+
+    <link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/static/css/common.css" rel="stylesheet">
+
 <div class="container">
-<h3>Welcome to our page</h3>
-<a href="${pageContext.request.contextPath}/loginForm">Login to Web</a>
+     <h3 align="center">Welcome to the faculty page</h3>
+     <table align="center">
+        <tr>
+            <td>
+                <a href="${pageContext.request.contextPath}/loginForm">Log in</a> |
+                <a href="${pageContext.request.contextPath}/registration">Sign up</a> |
+                <a href="${pageContext.request.contextPath}/courseForm">Courses</a>
+            </td>
+        </tr>
+    </table>
 </div>
+
 </body>
 </html>

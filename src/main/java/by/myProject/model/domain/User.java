@@ -4,26 +4,28 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class User {
-    private int idUser;
+    private Long idUser;
     private String userName;
     private String password;
     private String passwordConfirm;
     private String firstName;
     private String lastName;
     private String email;
-    private Set<Role> roles = new HashSet<Role>(0);
-    private Set<Course> courses = new HashSet<Course>(0);
-    private Set<Result> results = new HashSet<Result>(0);
+    private List<Role> roles = new ArrayList<>(0);
+    private List<Course> courses = new ArrayList<>(0);
+    private List<Result> results = new ArrayList<>(0);
 
     public User() {
     }
 
-    public User(int idUser, String userName, String password, String firstName, String lastName, String email) {
+    public User(Long idUser, String userName, String password, String firstName, String lastName, String email) {
         this.idUser = idUser;
         this.userName = userName;
         this.password = password;
@@ -32,7 +34,7 @@ public class User {
         this.email = email;
     }
 
-    public User(int idUser, String userName, String password, String firstName, String lastName, String email, Set<Role> roles) {
+    public User(Long idUser, String userName, String password, String firstName, String lastName, String email, List<Role> roles) {
         this.idUser = idUser;
         this.userName = userName;
         this.password = password;
@@ -45,11 +47,11 @@ public class User {
     @Id
     @Column(name = "id_user")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public int getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(Long idUser) {
         this.idUser = idUser;
     }
 
@@ -112,36 +114,36 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = { @JoinColumn(name = "id_user") },
             inverseJoinColumns = { @JoinColumn(name = "id_role") })
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_course",
             joinColumns = { @JoinColumn(name = "id_user") },
             inverseJoinColumns = { @JoinColumn(name = "id_course") })
-    public Set<Course> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
-    public void setCourses(Set<Course> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_result",
             joinColumns = { @JoinColumn(name = "id_user") },
             inverseJoinColumns = { @JoinColumn(name = "id_result") })
-    public Set<Result> getResults() {
+    public List<Result> getResults() {
         return results;
     }
-    public void setResults(Set<Result> results) {
+    public void setResults(List<Result> results) {
         this.results = results;
     }
 

@@ -2,22 +2,34 @@ package by.myProject.config;
 
 
 import by.myProject.security.LoginSecurityConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "by.myProject")
 @Import(value = {LoginSecurityConfig.class })
-public class AppConfig extends WebMvcConfigurerAdapter {
+public class AppConfig extends WebMvcConfigurerAdapter  {
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+
+        configurer.enable();
+    }
 
         @Override
         public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -28,6 +40,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
             viewResolver.setSuffix(".jsp");
             registry.viewResolver(viewResolver);
         }
+
+
+
+
+
 
         /**
          * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
@@ -52,7 +69,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         @Bean
         public MessageSource messageSource() {
             ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-            messageSource.setBasename("messages");
+            messageSource.setBasename("classpath:messages");
+            messageSource.setDefaultEncoding("UTF-8");
             return messageSource;
         }
 
@@ -71,6 +89,5 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 //        validator.setValidationMessageSource(messageSource());
 //        return validator;
 //    }
-
 
 }

@@ -6,6 +6,7 @@ import by.myProject.model.service.RoleService;
 import by.myProject.model.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class RegistrationController {
@@ -37,10 +40,13 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = {"/registration"}, method = RequestMethod.POST)
-    public String saveUser(@Valid User user, BindingResult result) {
+    @Transactional
+    public String saveUser(@Valid User user, String roleId, BindingResult result) {
         if(result.hasErrors()){
             return "registration";
         }
+        Role r = roleService.findById(Long.parseLong(roleId));
+        user.getRoles().add(r);
         userService.save(user);
         return "redirect:/usersList";
     }
@@ -59,27 +65,17 @@ public class RegistrationController {
 
 
     @RequestMapping("/remove/{id}")
-    public String removePerson(@PathVariable("id") int id){
+    public String removePerson(@PathVariable("id") Long id){
 
         this.userService.deleteById(id);
-        return "redirect:/registration";
+        return "redirect:/usersList";
     }
 
     @RequestMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") int id, Model model){
+    public String editPerson(@PathVariable("id") Long id, Model model){
         model.addAttribute("user", this.userService.findById(id));
         model.addAttribute("listUsers", this.userService.findAllUsers());
-        return "registration";
+        return "usersList";
     }
-
-
-
-
-
-
-
-
-
-
 
 }

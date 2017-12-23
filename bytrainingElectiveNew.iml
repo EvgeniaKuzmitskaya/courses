@@ -35,11 +35,9 @@
         <fileset id="initializer by.myProject.config.AppInitializer root context" name="MVC dispatcher initializer root context" removed="true">
           <file>file://$MODULE_DIR$/src/main/java/by/myProject/config/HibernateConfiguration.java</file>
         </fileset>
-        <fileset id="fileset2" name="Spring Application Context (2)" removed="false">
-          <file>file://$MODULE_DIR$/src/main/java/by/myProject/config/HibernateConfiguration.java</file>
-          <file>file://$MODULE_DIR$/src/main/java/by/myProject/config/AppConfig.java</file>
-        </fileset>
         <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/by/myProject/config/AppConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/by/myProject/config/HibernateConfiguration.java</file>
           <file>file://$MODULE_DIR$/src/main/java/by/myProject/security/LoginSecurityConfig.java</file>
         </fileset>
       </configuration>

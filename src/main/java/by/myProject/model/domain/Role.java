@@ -11,7 +11,7 @@ public class Role {
 
     private Long idRole;
     private String typeRole;
-    private Set<User> users = new HashSet<User>(0);
+    //private Set<User> users = new HashSet<User>(0);
 
 
 
@@ -24,11 +24,11 @@ public class Role {
         this.typeRole = typeRole;
     }
 
-    public Role(Long idRole, String typeRole, Set<User> userSet) {
+    /*public Role(Long idRole, String typeRole, Set<User> userSet) {
         this.idRole = idRole;
         this.typeRole = typeRole;
         this.users = users;
-    }
+    }*/
 
     @Id
     @Column(name = "id_role")
@@ -50,13 +50,13 @@ public class Role {
         this.typeRole = typeRole;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+    /*@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
     public Set<User> getUsers() {
         return users;
     }
     public void setUsers(Set<User> users) {
         this.users = users;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
