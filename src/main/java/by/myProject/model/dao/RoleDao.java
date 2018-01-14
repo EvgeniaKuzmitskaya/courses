@@ -13,4 +13,5 @@ public interface RoleDao  {
     void save (Role role);
     void deleteById(Long id);
 
+
 }

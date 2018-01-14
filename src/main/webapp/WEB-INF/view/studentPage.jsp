@@ -8,36 +8,47 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
-</head>
+    <meta charset= "utf-8">
+    <title>studentPage</title>
+ </head>
 <body>
-<sec:authorize access="hasRole('ROLE_STUDENT')">
-    <form id="regCourse"  action="/regCourse" method="POST" modelAttribute = "reg">
+<link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="${contextPath}/static/css/app.css" rel="stylesheet">
+<link href="${contextPath}/static/css/common.css" rel="stylesheet">
 
-        <label>Название курса</label>
-        <input type="text" id = "nameCourse" name="nameCourse" required>
+<%--<sec:authorize access="hasRole('ROLE_STUDENT')">--%>
 
-        <label>Начало</label>
-        <input type="date" id="dateBeginCourse" name="dateBeginCourse" placeholder="dd/MM/yyyy" required>
+<div class="generic-container">
+    <div class="title">
+        <div class="lead ">${title}</div>
+    </div>
 
-        <label>Конец</label>
-        <input type="date" id="dateEndCourse" name="dateEndCourse" placeholder="dd/MM/yyyy" required>
-
-        <label>Профессор</label>
-        <input type="textarea" id="descriptionCourse" name="descriptionCourse">
-
-        <input type="submit" value="Добавить курс" />
+    <c:url value='/logout' var="logoutUrl"/>
+    <form id="logout" action="${logoutUrl}" method="post" >
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
+    </form>
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+        User: ${pageContext.request.userPrincipal.name} |
+        <a href="javascript:document.getElementById('logout').submit()">Выход</a>
+    </c:if>
 
         <div>
-            <input type="submit" value="Зарегистрироваться на курс"/>
+            <table align="center">
+                <tr>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/courseStudent">My courses</a> |
+                        <a href="${pageContext.request.contextPath}/registerCourse">Register to the course</a>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </form>
+    </div>
+<%--</sec:authorize>--%>
 
-</sec:authorize>
+
 </body>
 </html>

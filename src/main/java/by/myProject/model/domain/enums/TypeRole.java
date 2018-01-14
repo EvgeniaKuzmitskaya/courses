@@ -1,4 +1,4 @@
-package by.myProject.model.dao;
+package by.myProject.model.domain.enums;
 
 public enum TypeRole {
 

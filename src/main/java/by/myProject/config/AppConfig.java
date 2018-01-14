@@ -1,12 +1,10 @@
 package by.myProject.config;
 
 
-import by.myProject.security.LoginSecurityConfig;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -22,29 +20,25 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "by.myProject")
-@Import(value = {LoginSecurityConfig.class })
+//@Import(value = {LoginSecurityConfig.class })
 public class AppConfig extends WebMvcConfigurerAdapter  {
+
+    private static final Charset UTF8 = Charset.forName("UTF-8");
+
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-
         configurer.enable();
     }
 
         @Override
         public void configureViewResolvers(ViewResolverRegistry registry) {
-
             InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
             viewResolver.setViewClass(JstlView.class);
             viewResolver.setPrefix("/WEB-INF/view/");
             viewResolver.setSuffix(".jsp");
             registry.viewResolver(viewResolver);
         }
-
-
-
-
-
 
         /**
          * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
@@ -89,5 +83,15 @@ public class AppConfig extends WebMvcConfigurerAdapter  {
 //        validator.setValidationMessageSource(messageSource());
 //        return validator;
 //    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+        stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "html", UTF8)));
+        converters.add(stringConverter);
+
+        // Add other converters ...
+    }
+
 
 }

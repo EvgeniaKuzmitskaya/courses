@@ -1,6 +1,9 @@
 package by.myProject.model.dao;
 
 import by.myProject.model.domain.Role;
+import org.hibernate.Session;
+
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository("roleDao")
-public class RoleDaoImpl extends AbstractDao<Integer, Role> implements RoleDao{
+public class RoleDaoImpl extends AbstractDao<Long, Role> implements RoleDao{
 
     static final Logger logger = LoggerFactory.getLogger(RoleDaoImpl.class);
 
@@ -59,6 +62,7 @@ public class RoleDaoImpl extends AbstractDao<Integer, Role> implements RoleDao{
         query.setParameter(0,typeRole);
         return query.getSingleResult();
     }
+
 }
 
 

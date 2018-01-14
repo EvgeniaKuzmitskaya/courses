@@ -12,7 +12,7 @@ public interface CourseDao {
     List<Course> findAll();
     void update (Course course);
     Course findById(Long id);
-
-    Optional<Course> findCourse(String nameCours);
-
+    List<Course> findAllByUser();
+    Optional<Course> findCourse(String nameCourse);
+    List<Course> findAllStudentCourse(String userName);
 }

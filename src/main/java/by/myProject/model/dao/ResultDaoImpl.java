@@ -1,23 +1,25 @@
 package by.myProject.model.dao;
 
 import by.myProject.model.domain.Result;
+import by.myProject.model.domain.User;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository("resultDao")
-public class ResultDaoImpl extends AbstractDao<Integer, Result> implements ResultDao{
+public class ResultDaoImpl extends AbstractDao<Long, Result> implements ResultDao{
 
     static final Logger logger = LoggerFactory.getLogger(ResultDaoImpl.class);
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         Result result = findById(id);
         if(null != result){
             getSession().delete(result);
@@ -40,7 +42,7 @@ public class ResultDaoImpl extends AbstractDao<Integer, Result> implements Resul
     }
 
     @Override
-    public Result findById(int id) {
+    public Result findById(Long id) {
         Result result = (Result) getSession().load(Result.class, id);
         logger.info("Result loaded successfully, Result details=" + result);
         return result;
@@ -51,5 +53,13 @@ public class ResultDaoImpl extends AbstractDao<Integer, Result> implements Resul
         getSession().update(result);
         logger.info("Result updated successfully, Result Details = " + result);
     }
+
+    @Override
+    public Result findByStudent(User user) {
+        TypedQuery<Result> query = getSession().createQuery("SELECT r.markResult FROM Result r join User u WHERE u.userName=?");
+        query.setParameter(0,user);
+        return query.getSingleResult();
+    }
+
 
 }

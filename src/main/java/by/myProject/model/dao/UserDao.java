@@ -16,4 +16,10 @@ public interface UserDao{
     void update (User user);
     Optional<User> findUser(String login, String password);
     List<User> findByRole();
+    List<User> findByCourse();
+    List<User> findStudents();
+    List<User> findStudentsByCourse(String nameCourse);
+    public List<User> findAllUsersRole();
+    List<User> findTeacherByCourse(String courseName);
+
 }

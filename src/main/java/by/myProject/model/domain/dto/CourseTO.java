@@ -1,5 +1,8 @@
 package by.myProject.model.domain.dto;
 
+import by.myProject.model.domain.Result;
+import by.myProject.model.domain.Status;
+
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.text.ParseException;
@@ -15,8 +18,14 @@ public class CourseTO {
     private String dateBeginCourse;
     private String dateEndCourse;
     private String nameCourse;
-    private String statusCourse;
     private String descriptionCourse;
+    private String userLastName;
+    private String typeStatus;
+    private String userId;
+    private String statusId;
+    private String markResult;
+    private String idResult;
+
 
     public static SimpleDateFormat getDateFormat() {
         return dateFormat;
@@ -57,19 +66,59 @@ public class CourseTO {
         this.nameCourse = nameCourse;
     }
 
-    public String getStatusCourse() {
-        return statusCourse;
-    }
-
-    public void setStatusCourse(String statusCourse) {
-        this.statusCourse = statusCourse;
-    }
-
     public String getDescriptionCourse() {
         return descriptionCourse;
     }
 
     public void setDescriptionCourse(String descriptionCourse) {
         this.descriptionCourse = descriptionCourse;
+    }
+
+    public String getUserLastName() {
+        return userLastName;
+    }
+
+    public void setUserLastName(String userLastName) {
+        this.userLastName = userLastName;
+    }
+
+    public String getTypeStatus() {
+        return typeStatus;
+    }
+
+    public void setTypeStatus(String typeStatus) {
+        this.typeStatus = typeStatus;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
+    }
+
+    public String getMarkResult() {
+        return markResult;
+    }
+
+    public void setMarkResult(Result markResult) {
+        this.markResult = markResult;
+    }
+
+    public String getIdResult() {
+        return idResult;
+    }
+
+    public void setIdResult(String idResult) {
+        this.idResult = idResult;
     }
 }

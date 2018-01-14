@@ -8,18 +8,18 @@ import java.util.Set;
 
 @Entity
 public class Result {
-    private int idResult;
+    private Long idResult;
     private int markResult;
     private List<User> users = new ArrayList<>(0);
 
 
     @Id
     @Column(name = "id_result")
-    public int getIdResult() {
+    public Long getIdResult() {
         return idResult;
     }
 
-    public void setIdResult(int idResult) {
+    public void setIdResult(Long idResult) {
         this.idResult = idResult;
     }
 
@@ -56,8 +56,9 @@ public class Result {
 
     @Override
     public int hashCode() {
-        int result = idResult;
+        int result = idResult.hashCode();
         result = 31 * result + markResult;
+        result = 31 * result + users.hashCode();
         return result;
     }
 

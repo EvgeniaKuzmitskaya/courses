@@ -1,6 +1,7 @@
 package by.myProject.model.service;
 
 import by.myProject.model.domain.User;
+import by.myProject.model.domain.dto.UserTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,14 @@ public interface UserService {
     List<User> findAllUsers();
     void update (User user);
     Optional<User> findUser(String login, String password);
-    public boolean isUserLoginUnique(Long id, String userName);
+    boolean isUserLoginUnique(Long id, String userName);
     List<User> findByRole();
+    List<User> findByCourse();
+    List<User> findStudents();
+    List<User> findStudentsByCourse(String nameCourse);
+    List<User> findAllUsersRole();
+    List<UserTO> getAllUsers();
+    List<User> findTeacherByCourse(String courseName);
+
+
 }

@@ -18,9 +18,9 @@ public class Course {
     private String nameCourse;
     private Date dateBeginCourse;
     private Date dateEndCourse;
-    private String statusCourse;
     private String descriptionCourse;
-//    private List<User> users = new ArrayList<>(0);
+    private Status status;
+    private List<User> users = new ArrayList<>(0);
 
     @Id
     @Column(name = "id_course")
@@ -66,16 +66,6 @@ public class Course {
     }
 
     @Basic
-    @Column(name = "status_course")
-    public String getStatusCourse() {
-        return statusCourse;
-    }
-
-    public void setStatusCourse(String statusCourse) {
-        this.statusCourse = statusCourse;
-    }
-
-    @Basic
     @Column(name = "description_course")
     public String getDescriptionCourse() {
         return descriptionCourse;
@@ -85,14 +75,24 @@ public class Course {
         this.descriptionCourse = descriptionCourse;
     }
 
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
-//    public List<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_status")
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -107,24 +107,22 @@ public class Course {
             return false;
         if (dateEndCourse != null ? !dateEndCourse.equals(course.dateEndCourse) : course.dateEndCourse != null)
             return false;
-        if (statusCourse != null ? !statusCourse.equals(course.statusCourse) : course.statusCourse != null)
-            return false;
         if (descriptionCourse != null ? !descriptionCourse.equals(course.descriptionCourse) : course.descriptionCourse != null)
             return false;
 
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = idCourse.hashCode();
-        result = 31 * result + nameCourse.hashCode();
-        result = 31 * result + dateBeginCourse.hashCode();
-        result = 31 * result + dateEndCourse.hashCode();
-        result = 31 * result + statusCourse.hashCode();
-        result = 31 * result + descriptionCourse.hashCode();
-        return result;
-    }
+//    @Override
+//    public int hashCode() {
+//        int result = idCourse.hashCode();
+//        result = 31 * result + nameCourse.hashCode();
+//        result = 31 * result + dateBeginCourse.hashCode();
+//        result = 31 * result + dateEndCourse.hashCode();
+//        result = 31 * result + descriptionCourse.hashCode();
+//        result = 31 * result + status.hashCode();
+//        return result;
+//    }
 
     @Override
     public String toString() {
@@ -133,7 +131,6 @@ public class Course {
                 ", nameCourse='" + nameCourse + '\'' +
                 ", dateBeginCourse=" + dateBeginCourse +
                 ", dateEndCourse=" + dateEndCourse +
-                ", statusCourse='" + statusCourse + '\'' +
                 ", descriptionCourse='" + descriptionCourse + '\'' +
                 '}';
     }

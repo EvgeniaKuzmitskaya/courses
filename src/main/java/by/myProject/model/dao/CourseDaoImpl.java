@@ -27,7 +27,7 @@ public class CourseDaoImpl extends AbstractDao<Long, Course> implements CourseDa
     }
 
     @Override
-    public Optional<Course> findCourse(String nameCours) {
+    public Optional<Course> findCourse(String nameCourse) {
         Session session = super.getSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Course> query = builder.createQuery(Course.class);
@@ -37,7 +37,7 @@ public class CourseDaoImpl extends AbstractDao<Long, Course> implements CourseDa
         List<Course> courseList = q.getResultList();
         for (Course course : courseList) {
             logger.info("Course List::" + course);
-            if (nameCours.equals(course.getNameCourse())){
+            if (nameCourse.equals(course.getNameCourse())){
                 return Optional.of(course);
             }
         }
@@ -62,16 +62,10 @@ public class CourseDaoImpl extends AbstractDao<Long, Course> implements CourseDa
     @Override
     @SuppressWarnings("unchecked")
     public List<Course> findAll() {
-        CriteriaBuilder builder = getSession().getCriteriaBuilder();
-        CriteriaQuery<Course> query = builder.createQuery(Course.class);
-        Root<Course> root = query.from(Course.class);
-        query.select(root);
-        Query<Course> q = getSession().createQuery(query);
-        List<Course> courseList = q.getResultList();
-        for (Course course : courseList) {
-            logger.info("Course List::" + course);
-        }
-        return courseList;
+        Session session = super.getSession();
+        Query query = session.createQuery("select c from Course c");
+        List list = query.getResultList();
+        return list;
     }
 
     @Override
@@ -79,4 +73,25 @@ public class CourseDaoImpl extends AbstractDao<Long, Course> implements CourseDa
         getSession().update(course);
         logger.info("Course updated successfully, Course Details = " + course);
     }
+
+
+    @Override
+    public List<Course> findAllByUser() {
+        Session session = super.getSession();
+        Query query = session.createQuery("select c, s from Course c join c.status s");
+        List list = query.list();
+        return list;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Course> findAllStudentCourse(String userName) {
+        Session session = super.getSession();
+        Query query = session.createQuery("select c from Course c join c.users u where u.userName = :userName");
+        query.setParameter("userName", userName);
+        List list = query.getResultList();
+        return list;
+    }
+
+
 }

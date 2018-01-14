@@ -1,6 +1,7 @@
 package by.myProject.model.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,35 +15,28 @@ public class User {
     private Long idUser;
     private String userName;
     private String password;
-    private String passwordConfirm;
     private String firstName;
     private String lastName;
     private String email;
+    private boolean enabled;
     private List<Role> roles = new ArrayList<>(0);
     private List<Course> courses = new ArrayList<>(0);
     private List<Result> results = new ArrayList<>(0);
 
+    public User(String userName, String password, List<GrantedAuthority> grantList) {
+    }
+
+    public User(String userName, String password, String firstName, String lastName, String email) {
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public User() {
     }
 
-    public User(Long idUser, String userName, String password, String firstName, String lastName, String email) {
-        this.idUser = idUser;
-        this.userName = userName;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
-
-    public User(Long idUser, String userName, String password, String firstName, String lastName, String email, List<Role> roles) {
-        this.idUser = idUser;
-        this.userName = userName;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.roles = roles;
-    }
 
     @Id
     @Column(name = "id_user")
@@ -94,6 +88,16 @@ public class User {
         this.lastName = lastName;
     }
 
+    @Column(name = "enabled")
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
     @Column(name = "email")
     @NotEmpty(message="Please Enter your email")
     public String getEmail() {
@@ -102,16 +106,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Column(name = "password_confirm")
-    @NotEmpty(message="Please Repeat password")
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -146,34 +140,6 @@ public class User {
     public void setResults(List<Result> results) {
         this.results = results;
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof User)) return false;
-//
-//        User user = (User) o;
-//
-//        if (idUser != user.idUser) return false;
-//        if (!userName.equals(user.userName)) return false;
-//        if (!password.equals(user.password)) return false;
-//        if (!passwordConfirm.equals(user.passwordConfirm)) return false;
-//        if (!firstName.equals(user.firstName)) return false;
-//        if (!lastName.equals(user.lastName)) return false;
-//        return email.equals(user.email);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = idUser;
-//        result = 31 * result + userName.hashCode();
-//        result = 31 * result + password.hashCode();
-//        result = 31 * result + passwordConfirm.hashCode();
-//        result = 31 * result + firstName.hashCode();
-//        result = 31 * result + lastName.hashCode();
-//        result = 31 * result + email.hashCode();
-//        return result;
-//    }
 
     @Override
     public String toString() {

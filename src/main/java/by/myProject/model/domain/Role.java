@@ -1,7 +1,5 @@
 package by.myProject.model.domain;
 
-import by.myProject.model.dao.TypeRole;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +9,7 @@ public class Role {
 
     private Long idRole;
     private String typeRole;
-    //private Set<User> users = new HashSet<User>(0);
+//    private Set<User> users = new HashSet<User>(0);
 
 
 
@@ -50,13 +48,13 @@ public class Role {
         this.typeRole = typeRole;
     }
 
-    /*@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
-    }
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }*/
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 
     @Override
     public boolean equals(Object o) {

@@ -8,6 +8,8 @@ import org.hibernate.query.Query;
 import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -22,9 +24,6 @@ import java.util.Optional;
 
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao{
-
-    @PersistenceContext
-    private EntityManager em;
 
     static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
@@ -59,48 +58,44 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao{
     @Override
     @SuppressWarnings("unchecked")
     public List<User> findAllUsers() {
-        List<User> userList = getSession().createQuery("from User").list();
-        for(User user : userList){
+        Session session = super.getSession();
+        Query query = session.createQuery("select u from User u");
+        List list = query.getResultList();
+        for(Object user : list){
             logger.info("User List::" + user);
         }
-        return userList;
+        return list;
 
-//        TypedQuery<User> query = getSession().createQuery("from User");
-//        return query.getResultList();
-
-        //        CriteriaQuery<User> query = createCriteriaBuilder().createQuery(User.class);
-//        Root<User> root = query.from(User.class);
-//        query.select(root);
-//        query.orderBy(createCriteriaBuilder().asc(root.get("lastname")));
-//        Query<User> q = getSession().createQuery(query);
-//        List<User> users = q.getResultList();
-//        return users;
     }
 
     @Override
     public User findByLastName(String lastName) {
         Session session = getSession();
-        Query query = session.createQuery("select u.lastName from User u WHERE u.lastName= :lastName");
-        User user = (User) query.setParameter("lastName", lastName).getSingleResult();
+        Query query = session.createQuery("select u.lastName from User u WHERE u.lastName= :lastname");
+        User user = (User) query.setParameter("lastname", lastName).getSingleResult();
         return user;
     }
 
-    @Override
+        @Override
     public User findByUserName(String userName) {
-//        CriteriaQuery<User> query = createCriteriaBuilder().createQuery(User.class);
-//        Root<User> root = query.from(User.class);
-//        query.select(root.get("userName"));
-//        Query<User> q=getSession().createQuery(query);
-//        User user = q.getSingleResult();
-//        return user;
-        logger.info("UseName : {}", userName);
-        Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("userName", userName));
-        User user = (User)crit.uniqueResult();
-        if(user!=null){
-            Hibernate.initialize(user.getRoles());
-        }
-        return user;
+//        logger.info("UseName : {}", userName);
+//        Session session = super.getSession();
+//        Query query = session.createQuery("select u from User u WHERE u.userName = :userName");
+//        query.setParameter("userName", userName);
+//        //        User user = new User();
+////        if(!list.isEmpty()) {
+////            user = (User) list.get(0);
+////        }
+//        return (User) query.getSingleResult();
+            String sql = "from User u where u.userName = :username";
+
+            Session session = super.getSession();
+
+            Query query = session.createQuery(sql);
+            query.setParameter("username", userName);
+
+            return (User) query.uniqueResult();
+
     }
 
     @Override
@@ -120,23 +115,64 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao{
 
     @Override
     public List<User> findByRole() {
-
-//        List<User> user = (List<User>)getSession().createSQLQuery(
-//                "SELECT u.lastname " +
-//                 "FROM user as u, user_role as u_r, role as r\n" +
-//                "WHERE u.id_user = u_r.id_user AND r.id_role = u_r.id_role\n" +
-//                "AND r.type_role = 'TEACHER' order by u.lastname")
-//                .addScalar("lastname")
-//                .setResultTransformer(Transformers.aliasToBean(User.class)).list();
-//        return user;
-
         Session session = super.getSession();
         Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'TEACHER'");
-//        Query query = session.createQuery("from User");
         List list = query.list();
         return list;
+    }
+
+    @Override
+    public List<User> findByCourse() {
+        Session session = super.getSession();
+//        Query query = session.createQuery("select u, p from User u LEFT join u.courses p on p.nameCourse = :nameCourse");
+        Query query = session.createQuery("select u, c from User u left join u.courses c");
+//        Query query = session.createQuery("select u, c from User u JOIN u.courses c");
+
+//        query.setParameter("nameCourse", course);
+        List list = query.list();
+        return list;
+//        User user = (User) query.getSingleResult();
+//        return user;
 
     }
+    @Override
+    public List<User> findStudents() {
+        Session session = super.getSession();
+        Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'STUDENT'");
+        List list = query.list();
+        return list;
+    }
+
+    @Override
+    public List<User> findStudentsByCourse(String nameCourse) {
+        Session session = super.getSession();
+        Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'STUDENT' join  u.courses c on c.nameCourse = ?1");
+        query.setParameter(1, "nameCourse");
+        List list = query.list();
+        return list;
+    }
+
+    public List<User> findAllUsersRole() {
+        Session session = super.getSession();
+        Query query = session.createQuery("select u, r from User u inner join u.roles r");
+        List list = query.getResultList();
+        for (Object user : list) {
+            logger.info("User List::" + user);
+        }
+        return list;
+    }
+
+    @Override
+    public List<User> findTeacherByCourse(String courseName) {
+        Session session = super.getSession();
+        Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'TEACHER' join u.courses c on c.nameCourse = :nameCourse");
+        query.setParameter("nameCourse", courseName);
+        List list = query.list();
+        return list;
+    }
+
+
+
 
 
 }

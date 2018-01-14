@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%--
   Created by IntelliJ IDEA.
@@ -17,93 +18,91 @@
 </head>
 <body>
 
-<h2>Добавление нового курса</h2>
+<link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="${contextPath}/static/css/app.css" rel="stylesheet">
 
-<form id="courseAdd"  action="/courseForm" method="POST" modelAttribute = "courseto">
+<div class="generic-container">
+    <table>
+        <tr>
+            <td class="title lead">
+            Add a new course |
+        <a href="${pageContext.request.contextPath}/adminPage">Admin page</a>
+        </td>
+        </tr>
+    </table>
 
-    <label>Название курса</label>
-    <input type="text" id = "nameCourse" name="nameCourse" required>
+<br/>
+<form id="courseAdd"  action="/courseForm" method="POST" modelAttribute = "courseto" class="form-horizontal">
 
-    <label>Начало</label>
-    <input type="date" id="dateBeginCourse" name="dateBeginCourse" placeholder="dd.MM.yyyy" required>
+<div class="row">
+    <div class="form-group col-md-12">
+        <label class="col-md-3 control-lable">Название курса</label>
+        <div class="col-md-7">
+            <input type="text" id = "nameCourse" name="nameCourse" class="form-control input-sm" required>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-12">
+        <label class="col-md-3 control-lable">Начало</label>
+        <div class="col-md-7">
+            <input type="date" id="dateBeginCourse" name="dateBeginCourse" placeholder="dd.MM.yyyy" class="form-control input-sm" required>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-12">
+        <label class="col-md-3 control-lable">Конец</label>
+        <div class="col-md-7">
+            <input type="date" id="dateEndCourse" name="dateEndCourse" placeholder="dd.MM.yyyy" class="form-control input-sm" required>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-12">
+        <form:label class="col-md-3 control-lable" path="users">Преподаватель:</form:label>
+        <div class="col-md-7">
+            <form:select name="userId" path="users" class="form-control">
+                <form:option value="0" label="select teacher"></form:option>
+            <form:options items="${users}" multiple="true" itemValue="idUser" itemLabel="lastName" class="form-control input-sm" />
+            </form:select>
+            <div class="has-error">
+                <form:errors path="users" class="help-inline" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-12">
+    <label class="col-md-3 control-lable">Описание курса</label>
+        <div class="col-md-7">
+            <input type="textarea" id="descriptionCourse" name="descriptionCourse" class="form-control input-sm">
+        </div>
+    </div>
+</div>
+<div class="row">
+     <div class="form-group col-md-12">
+     <form:label path="status" class="col-md-3 control-lable">Статус:</form:label></td>
+         <div class="col-md-7">
+            <form:select name="statusId" path="status" class="form-control">
+            <form:option value="0" label="select status"></form:option>
+            <form:options items="${status}" multiple="true" itemValue="idStatus" itemLabel="typeStatus" class="form-control input-sm" />
+            </form:select></td>
+                <div class="has-error">
+                    <form:errors path="status" class="help-inline" />
+                </div>
+         </div>
+     </div>
+</div>
+    <div class="row">
+        <div class="form-actions floatRight">
+            <input type="submit" value="Добавить курс" class="btn btn-primary btn-sm"/>
+        </div>
+    </div>
 
-    <label>Конец</label>
-    <input type="date" id="dateEndCourse" name="dateEndCourse" placeholder="dd.MM.yyyy" required>
 
-    <tr>
-        <td>Преподаватель:</td>
-        <td>
-            <form:select name="userId" path="users">
-            <form:options items="${users}" multiple="true" itemValue="idUser" itemLabel="lastName" />
-        </form:select></td>
-        <td><form:errors path="users" cssClass="error" /></td>
-    </tr>
-
-
-
-    <label>Описание курса</label>
-    <input type="textarea" id="descriptionCourse" name="descriptionCourse">
-
-    <input type="submit" value="Добавить курс" />
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
-
-
-<%--@elvariable id="course" type=""--%>
-<%--<form:form method="POST" action="/courseForm" modelAttribute="course">--%>
-    <%--<table>--%>
-        <%--<tr>--%>
-            <%--<td><form:label path="nameCourse">Название курса:</form:label></td>--%>
-            <%--<td><form:input path="nameCourse" /></td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td><form:label path="dateBeginCourse">Начало:</form:label></td>--%>
-            <%--<td><form:input path="dateBeginCourse" /></td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td><form:label path="dateEndCourse">Конец:</form:label></td>--%>
-            <%--<td><form:input path="dateEndCourse" /></td>--%>
-        <%--</tr>--%>
-
-        <%--<tr>--%>
-            <%--<td>Преподаватель:</td>--%>
-            <%--<td><form:select name="userId" path="users">--%>
-                <%--<form:options items="${users}" multiple="true" itemValue="idUser" itemLabel="lastName" />--%>
-            <%--</form:select></td>--%>
-            <%--<td><form:errors path="users" cssClass="error" /></td>--%>
-        <%--</tr>--%>
-
-
-        <%--<tr>--%>
-            <%--<td><form:label path="descriptionCourse"> Описание курса:</form:label></td>--%>
-            <%--<td><form:input path="descriptionCourse"  /></td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td colspan="2"><input type="submit" value="Добавить курс"/></td>--%>
-        <%--</tr>--%>
-    <%--</table>--%>
-    <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
-<%--</form:form>--%>
-
-<%--<h2>${message}</h2>--%>
-<%--<table>--%>
-    <%--<tr>--%>
-        <%--<td><strong>Название курса: </strong></td>--%>
-        <%--<td><strong>Начало</strong></td>--%>
-        <%--<td><strong>Конец</strong></td>--%>
-        <%--<td><strong>Описание курса: </strong></td>--%>
-    <%--</tr>--%>
-    <%--<c:forEach items="${listCourse}" var="course">--%>
-        <%--<tr>--%>
-            <%--<td>${course.courseName}</td>--%>
-            <%--<td>${course.dateBeginCourse}</td>--%>
-            <%--<td>${course.dateEndCourse}</td>--%>
-            <%--<td>${course.descriptionCourse}</td>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
-<%--</table>--%>
-
-
-
+</div>
 </body>
 </html>

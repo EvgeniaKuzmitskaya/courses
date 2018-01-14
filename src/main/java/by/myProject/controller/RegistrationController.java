@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -39,7 +38,7 @@ public class RegistrationController {
         return "registration";
     }
 
-    @RequestMapping(value = {"/registration"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/registration"})
     @Transactional
     public String saveUser(@Valid User user, String roleId, BindingResult result) {
         if(result.hasErrors()){
@@ -58,15 +57,13 @@ public class RegistrationController {
 
     @RequestMapping(value = "/usersList", method = RequestMethod.GET)
     public String addAll(Model model){
-        List<User> list = new ArrayList(userService.findAllUsers());
-        model.addAttribute("listUsers",list);
+        model.addAttribute("listUsers",userService.getAllUsers());
         return "usersList";
     }
 
 
     @RequestMapping("/remove/{id}")
     public String removePerson(@PathVariable("id") Long id){
-
         this.userService.deleteById(id);
         return "redirect:/usersList";
     }
