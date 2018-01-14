@@ -21,7 +21,6 @@ public class User {
     private boolean enabled;
     private List<Role> roles = new ArrayList<>(0);
     private List<Course> courses = new ArrayList<>(0);
-    private List<Result> results = new ArrayList<>(0);
 
     public User(String userName, String password, List<GrantedAuthority> grantList) {
     }
@@ -120,7 +119,7 @@ public class User {
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_course",
+    @JoinTable(name = "result",
             joinColumns = { @JoinColumn(name = "id_user") },
             inverseJoinColumns = { @JoinColumn(name = "id_course") })
     public List<Course> getCourses() {
@@ -128,17 +127,6 @@ public class User {
     }
     public void setCourses(List<Course> courses) {
         this.courses = courses;
-    }
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_result",
-            joinColumns = { @JoinColumn(name = "id_user") },
-            inverseJoinColumns = { @JoinColumn(name = "id_result") })
-    public List<Result> getResults() {
-        return results;
-    }
-    public void setResults(List<Result> results) {
-        this.results = results;
     }
 
     @Override

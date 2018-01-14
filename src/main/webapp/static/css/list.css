@@ -1,0 +1,48 @@
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: #ccc;
+}
+
+.tg td {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 5px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #ccc;
+    color: #333;
+    background-color: #fff;
+    align-self: center;
+    height: auto;
+}
+
+.tg th {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    padding: 10px 5px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #ccc;
+    color: #333;
+    background-color: #f0f0f0;
+    align-self: center;
+    height: auto;
+}
+
+.tg .tg-4eph {
+    background-color: #f9f9f9
+}
+
+.d9 h3 {
+    padding: 0 0 6px 10px;
+    border-left: 10px solid #A6D8CB;
+    border-bottom: 2px solid #A6D8CB;
+}

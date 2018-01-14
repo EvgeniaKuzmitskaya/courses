@@ -7,11 +7,10 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "result")
 public class Result {
     private Long idResult;
     private int markResult;
-    private List<User> users = new ArrayList<>(0);
-
 
     @Id
     @Column(name = "id_result")
@@ -33,15 +32,6 @@ public class Result {
         this.markResult = markResult;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "results")
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,7 +48,6 @@ public class Result {
     public int hashCode() {
         int result = idResult.hashCode();
         result = 31 * result + markResult;
-        result = 31 * result + users.hashCode();
         return result;
     }
 
