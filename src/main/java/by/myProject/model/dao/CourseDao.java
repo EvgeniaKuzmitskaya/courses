@@ -7,12 +7,10 @@ import java.util.Optional;
 
 public interface CourseDao {
 
+    Course findById(Long id);
+    Optional<Course> findCourse(String nameCourse);
     void save (Course course);
     void deleteById(Long id);
-    List<Course> findAll();
     void update (Course course);
-    Course findById(Long id);
-    List<Course> findAllByUser();
-    Optional<Course> findCourse(String nameCourse);
-    List<Course> findAllStudentCourse(String userName);
+    List<Course> findAll();
 }

@@ -14,7 +14,7 @@
 <html>
 <head>
     <title>registry</title>
-    <meta charset= "utf-8">
+    <meta charset="UTF-8">
 </head>
 <body>
 <link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
@@ -26,13 +26,13 @@
         <tr>
             <td class="title lead">
                 User Registration Form |
-                <a href="${pageContext.request.contextPath}/adminPage">Home page</a>
+                <a href="${contextPath}/adminPage">Home page</a>
             </td>
         </tr>
     </table>
     <br/>
 
-<form id="registrationForm" action="/registration" modelAttribute="user" method="post" class="form-horizontal">
+<form id="registrationForm" action="/registration" modelAttribute="userto" method="post" class="form-horizontal" accept-charset="UTF-8">
 
 <div class="row">
     <div class="form-group col-md-12">

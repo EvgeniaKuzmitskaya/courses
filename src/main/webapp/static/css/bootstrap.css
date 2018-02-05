@@ -109,7 +109,7 @@ html {
 }
 
 @-ms-viewport {
-  width: device-width;
+  width: auto;
 }
 
 article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -1879,11 +1879,6 @@ pre code {
 }
 
 .form-control:-ms-input-placeholder {
-  color: #868e96;
-  opacity: 1;
-}
-
-.form-control::-ms-input-placeholder {
   color: #868e96;
   opacity: 1;
 }

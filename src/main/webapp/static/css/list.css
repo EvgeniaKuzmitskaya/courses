@@ -5,7 +5,6 @@
 }
 
 .tg td {
-    font-family: Arial, sans-serif;
     font-size: 14px;
     text-align: center;
     padding: 10px 5px;
@@ -21,11 +20,11 @@
 }
 
 .tg th {
-    font-family: Arial, sans-serif;
     font-size: 14px;
     font-weight: normal;
     text-align: center;
     padding: 10px 5px;
+    border-padding: 20px;
     border-style: solid;
     border-width: 1px;
     overflow: hidden;
@@ -35,6 +34,7 @@
     background-color: #f0f0f0;
     align-self: center;
     height: auto;
+    width: auto;
 }
 
 .tg .tg-4eph {

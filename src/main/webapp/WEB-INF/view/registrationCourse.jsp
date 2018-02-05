@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%--
   Created by IntelliJ IDEA.
@@ -13,8 +14,8 @@
 
 <html>
 <head>
-    <meta charset=UTF-8">
     <title>AddCourse</title>
+    <meta charset=UTF-8">
 </head>
 <body>
 
@@ -26,13 +27,13 @@
         <tr>
             <td class="title lead">
             Add a new course |
-        <a href="${pageContext.request.contextPath}/adminPage">Admin page</a>
+        <a href="${contextPath}/adminPage">Admin page</a>
         </td>
         </tr>
     </table>
 
 <br/>
-<form id="courseAdd"  action="/courseForm" method="POST" modelAttribute = "courseto" class="form-horizontal">
+<form id="courseAdd"  action="/courseForm" method="POST" modelAttribute = "courseto" class="form-horizontal" accept-charset="UTF-8">
 
 <div class="row">
     <div class="form-group col-md-12">

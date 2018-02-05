@@ -1,7 +1,9 @@
 package by.myProject.model.service;
 
 import by.myProject.model.domain.Course;
+import by.myProject.model.domain.UserCourse;
 import by.myProject.model.domain.dto.CourseTO;
+import by.myProject.model.domain.dto.StudentCourseTO;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -9,21 +11,20 @@ import java.util.Optional;
 
 public interface CourseService {
 
-    void save (Course course);
-    Optional<Course> save (CourseTO dto);
-    void deleteById(Long id);
-    List<Course> findAll();
-    void update (Course course);
+    Optional<Course> saveCourse (CourseTO courseTO);
     Course findById(Long id);
     Optional<Course> findCourse(String nameCourse);
-    List<Course> findAllByUser();
+    Optional<Course> saveStudent(CourseTO courseTO, String userName);
+    CourseTO getAllCoursesStudent(Long courseId);
+    void save (Course course);
+    void deleteById(Long id);
+    void update (Course course);
+    List<Course> findAll();
     List<CourseTO> getAllCourses();
     SimpleDateFormat getDateFormat();
-    CourseTO getAllCoursesStudent(Long courseId);
-//    Optional<Course> FindFormStudent(Course course);
-    Optional<Course> saveStudent(CourseTO courseTO, String userName);
     List<CourseTO> getAllCoursesStudent(String userName);
-    List<Course> findAllStudentCourse(String userName);
-
-
+    List<CourseTO> getAllCoursesTeacher(String userName);
+    List<StudentCourseTO> getAllCourseStudents(Long courseId);
+    CourseTO getCourseEdit(Long courseId);
+    Optional<Course> updateCourse(CourseTO courseTO, Long statusId, Long idCourse);
 }

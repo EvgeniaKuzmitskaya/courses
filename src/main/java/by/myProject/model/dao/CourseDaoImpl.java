@@ -21,7 +21,7 @@ public class CourseDaoImpl extends AbstractDao<Long, Course> implements CourseDa
 
     @Override
     public Course findById(Long id) {
-        Course course = (Course) getSession().load(Course.class, id);
+        Course course = getSession().load(Course.class, id);
         logger.info("Course loaded successfully, Course details=" + course);
         return course;
     }
@@ -41,7 +41,7 @@ public class CourseDaoImpl extends AbstractDao<Long, Course> implements CourseDa
                 return Optional.of(course);
             }
         }
-        return Optional.empty();//Optional.of((Course) courseList);
+        return Optional.empty();
     }
 
     @Override
@@ -73,25 +73,4 @@ public class CourseDaoImpl extends AbstractDao<Long, Course> implements CourseDa
         getSession().update(course);
         logger.info("Course updated successfully, Course Details = " + course);
     }
-
-
-    @Override
-    public List<Course> findAllByUser() {
-        Session session = super.getSession();
-        Query query = session.createQuery("select c, s from Course c join c.status s");
-        List list = query.list();
-        return list;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Course> findAllStudentCourse(String userName) {
-        Session session = super.getSession();
-        Query query = session.createQuery("select c from Course c join c.users u where u.userName = :userName");
-        query.setParameter("userName", userName);
-        List list = query.getResultList();
-        return list;
-    }
-
-
 }

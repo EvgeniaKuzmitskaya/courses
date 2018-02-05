@@ -48,14 +48,6 @@ public class AppConfig extends WebMvcConfigurerAdapter  {
             registry.addResourceHandler("/static/**").addResourceLocations("/static/");
         }
 
-        /**
-         * Configure Converter to be used.
-         * In our example, we need a converter to convert string values[Roles] to UserProfiles in newUser.jsp
-         */
-//        @Override
-//        public void addFormatters(FormatterRegistry registry) {
-//            registry.addConverter(roleConverter);
-//        }
 
         /**
          * Configure MessageSource to lookup any validation/error message in internationalized property files
@@ -77,21 +69,10 @@ public class AppConfig extends WebMvcConfigurerAdapter  {
             matcher.setUseRegisteredSuffixPatternMatch(true);
         }
 
-//    @Override
-//    public Validator getValidator() {
-//        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-//        validator.setValidationMessageSource(messageSource());
-//        return validator;
-//    }
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        @Override
+        public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
         stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "html", UTF8)));
         converters.add(stringConverter);
-
-        // Add other converters ...
-    }
-
-
+        }
 }

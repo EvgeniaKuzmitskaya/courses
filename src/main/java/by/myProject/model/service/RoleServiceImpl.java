@@ -21,17 +21,6 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
-    public Role findByType(String typeRole) {
-        Role role = this.roleDao.findByType(typeRole);
-        return role;
-    }
-
-    @Override
-    public List<Role> findAllRoles() {
-        return this.roleDao.findAllRoles();
-    }
-
-    @Override
     public void save(Role role) {
         this.roleDao.save(role);
     }
@@ -45,5 +34,11 @@ public class RoleServiceImpl implements RoleService{
     public void update(Role role) {
         this.roleDao.update(role);
     }
+
+    @Override
+    public List<Role> findAllRoles() {
+        return this.roleDao.findAllRoles();
+    }
+
 }
 

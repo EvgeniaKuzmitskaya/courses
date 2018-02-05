@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table(name = "user")
 public class User {
     private Long idUser;
     private String userName;
@@ -20,22 +21,20 @@ public class User {
     private String email;
     private boolean enabled;
     private List<Role> roles = new ArrayList<>(0);
-    private List<Course> courses = new ArrayList<>(0);
+    private List<UserCourse> userCourses = new ArrayList<>(0);
 
-    public User(String userName, String password, List<GrantedAuthority> grantList) {
-    }
-
-    public User(String userName, String password, String firstName, String lastName, String email) {
+    public User(Long idUser, String userName, String password, String firstName, String lastName, String email, Boolean enabled) {
+        this.idUser = idUser;
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.enabled = enabled;
     }
 
     public User() {
     }
-
 
     @Id
     @Column(name = "id_user")
@@ -48,7 +47,7 @@ public class User {
         this.idUser = idUser;
     }
 
-    @Column(name = "login")
+    @Column(name = "username", unique = true)
     @NotEmpty(message="Please Enter your login")
     public String getUserName() {
         return userName;
@@ -59,6 +58,7 @@ public class User {
     }
 
     @Column(name = "password")
+    @NotEmpty(message="Please Enter your password")
     public String getPassword() {
         return password;
     }
@@ -96,7 +96,6 @@ public class User {
         this.enabled = enabled;
     }
 
-
     @Column(name = "email")
     @NotEmpty(message="Please Enter your email")
     public String getEmail() {
@@ -118,15 +117,13 @@ public class User {
         this.roles = roles;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "result",
-            joinColumns = { @JoinColumn(name = "id_user") },
-            inverseJoinColumns = { @JoinColumn(name = "id_course") })
-    public List<Course> getCourses() {
-        return courses;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public List<UserCourse> getUserCourses() {
+        return userCourses;
     }
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+
+    public void setUserCourses(List<UserCourse> userCourses) {
+        this.userCourses = userCourses;
     }
 
     @Override

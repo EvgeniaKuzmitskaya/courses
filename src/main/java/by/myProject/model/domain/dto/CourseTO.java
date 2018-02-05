@@ -1,13 +1,7 @@
 package by.myProject.model.domain.dto;
 
-import by.myProject.model.domain.Result;
-import by.myProject.model.domain.Status;
-
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
 public class CourseTO {
 
@@ -106,13 +100,7 @@ public class CourseTO {
         this.statusId = statusId;
     }
 
-    public String getMarkResult() {
-        return markResult;
-    }
 
-    public void setMarkResult(Result markResult) {
-        this.markResult = markResult;
-    }
 
     public String getIdResult() {
         return idResult;
@@ -120,5 +108,13 @@ public class CourseTO {
 
     public void setIdResult(String idResult) {
         this.idResult = idResult;
+    }
+
+    public String getMarkResult() {
+        return markResult;
+    }
+
+    public void setMarkResult(String markResult) {
+        this.markResult = markResult;
     }
 }

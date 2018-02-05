@@ -5,14 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "role")
 public class Role {
 
     private Long idRole;
     private String typeRole;
-//    private Set<User> users = new HashSet<User>(0);
-
-
-
 
     public Role() {
     }
@@ -21,12 +18,6 @@ public class Role {
         this.idRole = idRole;
         this.typeRole = typeRole;
     }
-
-    /*public Role(Long idRole, String typeRole, Set<User> userSet) {
-        this.idRole = idRole;
-        this.typeRole = typeRole;
-        this.users = users;
-    }*/
 
     @Id
     @Column(name = "id_role")
@@ -47,14 +38,6 @@ public class Role {
     public void setTypeRole(String typeRole) {
         this.typeRole = typeRole;
     }
-
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
 
     @Override
     public boolean equals(Object o) {

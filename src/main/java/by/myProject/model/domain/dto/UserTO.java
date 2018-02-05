@@ -1,5 +1,9 @@
 package by.myProject.model.domain.dto;
 
+import by.myProject.model.domain.Role;
+
+import java.util.List;
+
 public class UserTO {
 
     private Long idUser;
@@ -9,6 +13,15 @@ public class UserTO {
     private String lastName;
     private String email;
     private String typeRole;
+    private Long idRole;
+
+    public Long getIdRole() {
+        return idRole;
+    }
+
+    public void setIdRole(Long idRole) {
+        this.idRole = idRole;
+    }
 
     public Long getIdUser() {
         return idUser;
@@ -65,4 +78,6 @@ public class UserTO {
     public void setTypeRole(String typeRole) {
         this.typeRole = typeRole;
     }
+
+
 }

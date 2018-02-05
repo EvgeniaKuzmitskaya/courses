@@ -21,7 +21,17 @@ public class Course {
     private Date dateEndCourse;
     private String descriptionCourse;
     private Status status;
-    private List<User> users = new ArrayList<>(0);
+    private List<UserCourse> userCourses = new ArrayList<>();
+
+   public Course(){}
+
+    public Course(Long idCourse, String nameCourse, Date dateBeginCourse, Date dateEndCourse, String descriptionCourse) {
+        this.idCourse = idCourse;
+        this.nameCourse = nameCourse;
+        this.dateBeginCourse = dateBeginCourse;
+        this.dateEndCourse = dateEndCourse;
+        this.descriptionCourse = descriptionCourse;
+    }
 
     @Id
     @Column(name = "id_course")
@@ -76,13 +86,13 @@ public class Course {
         this.descriptionCourse = descriptionCourse;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
-    public List<User> getUsers() {
-        return users;
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+    public List<UserCourse> getUserCourses() {
+        return userCourses;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUserCourses(List<UserCourse> userCourses) {
+        this.userCourses = userCourses;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -113,17 +123,6 @@ public class Course {
 
         return true;
     }
-
-//    @Override
-//    public int hashCode() {
-//        int result = idCourse.hashCode();
-//        result = 31 * result + nameCourse.hashCode();
-//        result = 31 * result + dateBeginCourse.hashCode();
-//        result = 31 * result + dateEndCourse.hashCode();
-//        result = 31 * result + descriptionCourse.hashCode();
-//        result = 31 * result + status.hashCode();
-//        return result;
-//    }
 
     @Override
     public String toString() {

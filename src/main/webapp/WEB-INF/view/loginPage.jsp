@@ -12,37 +12,38 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Login</title>
-    <meta charset= "utf-8">
+    <meta charset="UTF-8">
 </head>
+<body onload='document.login.userName.focus();'>
 
 <link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextPath}/static/css/common.css" rel="stylesheet">
 
-<%--<body onload='document.loginForm.username.focus();'>--%>
-<h3 class="text-center">Авторизация</h3>
-
-<%--<c:if test="${not empty error}"><div>${error}</div></c:if>--%>
-<%--<c:if test="${not empty message}"><div>${message}</div></c:if>--%>
+    <h3 class="text-center">Вход</h3>
 
 <div class="container">
-    <form name="loginForm" method="POST" action="${contextPath}/loginUrl" class="form-signin">
+    <form name="login" method="POST" action="${contextPath}/loginUrl" class="form-signin">
+
         <c:if test="${param.error != null}">
-            <i class="has-error">Sorry! You entered invalid username/password.</i>
+            <div class="alert alert-danger">
+                <p>Invalid username and password.</p>
+            </div>
         </c:if>
-        <input name="username" type="text" class="form-control" placeholder="Username" autofocus="true"/>
-        <input name="password" type="password" class="form-control" placeholder="Password" />
 
+        <c:if test="${param.logout != null}">
+            <div class="alert alert-success">
+                <p>You have been logged out successfully.</p>
+            </div>
+        </c:if>
+
+        <input name="userName" type="text" class="form-control" placeholder="username" autofocus="true"/>
+        <input name="password" type="password" class="form-control" placeholder="password" />
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-<!-- if this is login for update, ignore remember me check -->
-<c:if test="${empty loginUpdate}">
         <input id="remember_me" name="_spring_security_remember_me" type="checkbox"/> <!-- Флажок "запомнить меня" -->
         <label for="remember_me" class="inline">Remember me</label>
-</c:if>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
 
     <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>

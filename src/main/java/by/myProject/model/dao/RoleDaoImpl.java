@@ -20,7 +20,7 @@ public class RoleDaoImpl extends AbstractDao<Long, Role> implements RoleDao{
 
     @Override
     public Role findById(Long id) {
-        Role role = (Role) getSession().load(Role.class, id);
+        Role role = getSession().load(Role.class, id);
         logger.info("Role loaded successfully, Role details=" + role);
         return role;
     }
@@ -55,14 +55,6 @@ public class RoleDaoImpl extends AbstractDao<Long, Role> implements RoleDao{
         }
         return roleList;
     }
-
-    @Override
-    public Role findByType(String typeRole) {
-        TypedQuery<Role> query = getSession().createQuery("FROM Role WHERE typeRole=?");
-        query.setParameter(0,typeRole);
-        return query.getSingleResult();
-    }
-
 }
 
 

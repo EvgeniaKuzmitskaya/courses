@@ -10,10 +10,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>RegistrationCourse</title>
-    <meta charset= "utf-8">
+    <meta charset="UTF-8">
 </head>
 <body>
 <link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +27,7 @@
         <tr>
             <td class="title lead">
                 Register to the course |
-                <a href="${pageContext.request.contextPath}/studentPage">Student page</a>
+                <a href="${contextPath}/studentPage">Student page</a>
             </td>
         </tr>
     </table>
@@ -168,21 +169,21 @@
             $.get(
                 url,
                 "courseId=" + courseId,
-                function (result) {
+                function (userCourse) {
 
-                    $('.course-date-begin').html("<span>" + result.dateBeginCourse + "</span>");
-                    $('.course-date-end').html("<span>" + result.dateEndCourse + "</span>");
-                    $('.name-teacher').html("<span>" + result.userLastName + "</span>");
-                    $('#idCourseHidden').val(result.idCourse);
+                    $('.course-date-begin').html("<span>" + userCourse.dateBeginCourse + "</span>");
+                    $('.course-date-end').html("<span>" + userCourse.dateEndCourse + "</span>");
+                    $('.name-teacher').html("<span>" + userCourse.userLastName + "</span>");
+                    $('#idCourseHidden').val(userCourse.idCourse);
 
-//                    if (result.teachers) {
-//                        $('#teacherId').html(result.teachers.map(function (user) {
+//                    if (userCourse.teachers) {
+//                        $('#teacherId').html(userCourse.teachers.map(function (user) {
 //                            return "<option "+ "value=\"" + user.idUser + "\"" + ">" + user.lastName + "</option>";
 //                        }).join(""));
 //                    }
 
 
-                    console.log(result);
+                    console.log(userCourse);
                 },
                 "json"
             );

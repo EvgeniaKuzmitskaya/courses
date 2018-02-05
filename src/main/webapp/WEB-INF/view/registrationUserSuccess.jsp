@@ -8,10 +8,11 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>Users List</title>
-    <meta charset= "utf-8">
+    <meta charset="UTF-8">
 </head>
 <body>
 <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet">
@@ -19,17 +20,20 @@
 <link href="<c:url value='/static/css/list.css' />" rel="stylesheet">
 
 <div class="container">
+
     <table>
         <tr>
             <td class="title lead">
                 List User |
-                <a href="${pageContext.request.contextPath}/adminPage">Admin page</a> |
-                <a href="${pageContext.request.contextPath}/registration">Add New User</a> |
+                <a href="${contextPath}/adminPage">Admin page</a> |
+                <a href="${contextPath}/registration">Add a new user</a> |
             </td>
         </tr>
     </table>
+
 <br/>
 <br/>
+
     <c:if test="${!empty listUsers}">
     <table class="tg">
         <thead>
@@ -62,13 +66,13 @@
         </c:forEach>
     </c:if>
     </table>
-            <%--<sec:authorize access="hasRole('ROLE_ADMIN')">--%>
-            <%--<div class="well">--%>
-                <%--<a href="registration.jsp">Add New User</a>--%>
-            <%--</div>--%>
-            <%--</sec:authorize>--%>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div class="well">
+                <a href="${contextPath}/registration">Add a new user</a>
+            </div>
+            </sec:authorize>
 </div>
-
+</div>
 </body>
 </html>
 

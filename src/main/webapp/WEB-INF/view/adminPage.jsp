@@ -14,7 +14,7 @@
 <html>
 <head>
     <title>adminPage</title>
-    <meta charset= "utf-8">
+    <meta charset="UTF-8">
 </head>
 
 <body>
@@ -23,43 +23,49 @@
     <link href="${contextPath}/static/css/common.css" rel="stylesheet">
 <%--<sec:authorize access="hasRole('ADMIN')">--%>
     <div class="generic-container">
+
         <div class="title">
             <div class="lead ">${title}</div>
         </div>
 
-<c:url value='/logout' var="logoutUrl" />
-<form id="logout" action="${logoutUrl}" method="post" >
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-</form>
-<c:if test="${pageContext.request.userPrincipal.name != null}">
-    User: ${pageContext.request.userPrincipal.name} |
-    <a href="javascript:document.getElementById('logout').submit()">Выход</a>
-</c:if>
+<%--<c:url value='/logout' var="logoutUrl" />--%>
+<%--<form id="logout" action="${logoutUrl}" method="post" >--%>
+    <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
+<%--</form>--%>
+<%--<c:if test="${pageContext.request.userPrincipal.name != null}">--%>
+    <%--User: ${pageContext.request.userPrincipal.name} |--%>
+    <%--<a href="javascript:document.getElementById('logout').submit()">Выход</a>--%>
+<%--</c:if>--%>
+
+        <c:if test="${userName != null}">
+            User: <strong>${userName}</strong> /
+            <a href="<c:url value="/logout" />"> Выход</a>
+        </c:if>
 <br/>
 <br/>
     <div>
         <table align="center">
             <tr>
                 <td>
-                    <a href="${pageContext.request.contextPath}/registration">Register a new user</a> |
-                    <a href="${pageContext.request.contextPath}/courseForm">Add a new course</a> |
-                    <a href="${pageContext.request.contextPath}/listCourses">List of courses</a> |
-                    <a href="${pageContext.request.contextPath}/usersList">List of users</a>
+                    <a href="${contextPath}/registration">Register a new user</a> |
+                    <a href="${contextPath}/courseForm">Add a new course</a> |
+                    <a href="${contextPath}/listCourses">List of courses</a> |
+                    <a href="${contextPath}/registrationUserSuccess">List of users</a>
                 </td>
             </tr>
         </table>
     </div>
-    </div>
+
 <%--</sec:authorize>--%>
 
-    <sec:authorize access="isRememberMe()">
-        <h2># This user is login by "Remember Me Cookies".</h2>
-    </sec:authorize>
+    <%--<sec:authorize access="isRememberMe()">--%>
+        <%--<h2># This user is login by "Remember Me Cookies".</h2>--%>
+    <%--</sec:authorize>--%>
 
-    <sec:authorize access="isFullyAuthenticated()">
-        <h2># This user is login by username / password.</h2>
-    </sec:authorize>
-
+    <%--<sec:authorize access="isFullyAuthenticated()">--%>
+        <%--<h2># This user is login by username / password.</h2>--%>
+    <%--</sec:authorize>--%>
+    <%--</div>--%>
 
 </body>
 </html>

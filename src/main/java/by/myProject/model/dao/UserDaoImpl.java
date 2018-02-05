@@ -29,14 +29,14 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao{
 
     @Override
     public User findById(Long id) {
-        User user = (User) getSession().load(User.class, id);
+        User user = getSession().load(User.class, id);
         logger.info("User loaded successfully, User details=" + user);
         return user;
     }
 
     @Override
     public void save (User user) {
-        getSession().persist(user);
+        getSession().save(user);
         logger.info("User saved successfully, User Details = " + user);
     }
 
@@ -55,6 +55,7 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao{
         logger.info("User updated successfully, User Details = " + user);
     }
 
+
     @Override
     @SuppressWarnings("unchecked")
     public List<User> findAllUsers() {
@@ -70,109 +71,46 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao{
 
     @Override
     public User findByLastName(String lastName) {
-        Session session = getSession();
-        Query query = session.createQuery("select u.lastName from User u WHERE u.lastName= :lastname");
-        User user = (User) query.setParameter("lastname", lastName).getSingleResult();
+        String sql = "from User u where u.lastName = :lastname";
+        Session session = super.getSession();
+        Query query = session.createQuery(sql);
+        query.setParameter("lastname", lastName);
+        User user = (User) query.getSingleResult();
+        logger.info("User by lastname::" + user);
+        return user;
+
+    }
+
+    @Override
+    public User findByUserName(String userName) {
+        String sql = "from User u where u.userName = :username";
+        Session session = super.getSession();
+        Query query = session.createQuery(sql);
+        query.setParameter("username", userName);
+        User user = (User) query.uniqueResult();
+        logger.info("User by username::" + user);
         return user;
     }
 
-        @Override
-    public User findByUserName(String userName) {
-//        logger.info("UseName : {}", userName);
-//        Session session = super.getSession();
-//        Query query = session.createQuery("select u from User u WHERE u.userName = :userName");
-//        query.setParameter("userName", userName);
-//        //        User user = new User();
-////        if(!list.isEmpty()) {
-////            user = (User) list.get(0);
-////        }
-//        return (User) query.getSingleResult();
-            String sql = "from User u where u.userName = :username";
-
-            Session session = super.getSession();
-
-            Query query = session.createQuery(sql);
-            query.setParameter("username", userName);
-
-            return (User) query.uniqueResult();
-
-    }
 
     @Override
-    public Optional<User> findUser(String login, String password) {
-        Session session = super.getSession();
-        String sql = "from User as o where o.userName=? and o.password=?";
-        TypedQuery<User> query = session.createQuery(sql);
-        query.setParameter(0,login);
-        query.setParameter(1,password);
-        List<User> list = query.getResultList();
-        if ((list != null) && (list.size() > 0)) {
-            return Optional.of(list.get(0));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public List<User> findByRole() {
+    public List<User> findTeachers() {
         Session session = super.getSession();
         Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'TEACHER'");
         List list = query.list();
+        logger.info("Teacher list ::" + list);
         return list;
     }
 
-    @Override
-    public List<User> findByCourse() {
-        Session session = super.getSession();
-//        Query query = session.createQuery("select u, p from User u LEFT join u.courses p on p.nameCourse = :nameCourse");
-        Query query = session.createQuery("select u, c from User u left join u.courses c");
-//        Query query = session.createQuery("select u, c from User u JOIN u.courses c");
 
-//        query.setParameter("nameCourse", course);
-        List list = query.list();
-        return list;
-//        User user = (User) query.getSingleResult();
-//        return user;
-
-    }
     @Override
     public List<User> findStudents() {
         Session session = super.getSession();
         Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'STUDENT'");
         List list = query.list();
+        logger.info("Students list ::" + list);
         return list;
     }
-
-    @Override
-    public List<User> findStudentsByCourse(String nameCourse) {
-        Session session = super.getSession();
-        Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'STUDENT' join  u.courses c on c.nameCourse = ?1");
-        query.setParameter(1, "nameCourse");
-        List list = query.list();
-        return list;
-    }
-
-    public List<User> findAllUsersRole() {
-        Session session = super.getSession();
-        Query query = session.createQuery("select u, r from User u inner join u.roles r");
-        List list = query.getResultList();
-        for (Object user : list) {
-            logger.info("User List::" + user);
-        }
-        return list;
-    }
-
-    @Override
-    public List<User> findTeacherByCourse(String courseName) {
-        Session session = super.getSession();
-        Query query = session.createQuery("select u from User u join u.roles p on p.typeRole = 'TEACHER' join u.courses c on c.nameCourse = :nameCourse");
-        query.setParameter("nameCourse", courseName);
-        List list = query.list();
-        return list;
-    }
-
-
-
 
 
 }

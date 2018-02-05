@@ -20,42 +20,42 @@ import java.util.Properties;
 @PropertySource(value = "classpath:application.properties")
 public class TestDataBaseConfig {
 
-//    @Autowired
-//    private Environment environment;
-//
-//    @Bean
-//    public LocalSessionFactoryBean sessionFactory() {
-//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-//        sessionFactory.setDataSource(dataSource());
-//        sessionFactory.setPackagesToScan(new String[] { "by.myProject.model.domain" });
-//        sessionFactory.setHibernateProperties(hibernateProp());
-//        return sessionFactory;
-//    }
-//
-//    private Properties hibernateProp() {
-//        Properties properties = new Properties();
-//        properties.put("hibernate.dialect", environment.getRequiredProperty("test.hibernate.dialect"));
-//        properties.put("hibernate.show_sql", environment.getRequiredProperty("test.hibernate.show_sql"));
-//        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("test.hibernate.hbm2ddl.auto"));
-//        return properties;
-//    }
-//
-//    private DataSource dataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName(environment.getRequiredProperty("test.db.driver"));
-//        dataSource.setUrl(environment.getRequiredProperty("test.db.url"));
-//        dataSource.setUsername(environment.getRequiredProperty("test.db.username"));
-//        dataSource.setPassword(environment.getRequiredProperty("test.db.password"));
-//        return dataSource;
-//    }
-//
-//    @Bean
-//    @Autowired
-//    public HibernateTransactionManager transactionManager(SessionFactory s) {
-//        HibernateTransactionManager txManager = new HibernateTransactionManager();
-//        txManager.setSessionFactory(s);
-//        return txManager;
-//    }
+    @Autowired
+    private Environment environment;
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan(new String[] { "by.myProject.model.domain" });
+        sessionFactory.setHibernateProperties(hibernateProp());
+        return sessionFactory;
+    }
+
+    private Properties hibernateProp() {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", environment.getRequiredProperty("test.hibernate.dialect"));
+        properties.put("hibernate.show_sql", environment.getRequiredProperty("test.hibernate.show_sql"));
+        properties.put("hibernate.format_sql", environment.getRequiredProperty("test.hibernate.format_sql"));
+        return properties;
+    }
+
+    private DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(environment.getRequiredProperty("test.jdbc.driverClassName"));
+        dataSource.setUrl(environment.getRequiredProperty("test.jdbc.url"));
+        dataSource.setUsername(environment.getRequiredProperty("test.jdbc.username"));
+        dataSource.setPassword(environment.getRequiredProperty("test.jdbc.password"));
+        return dataSource;
+    }
+
+    @Bean
+    @Autowired
+    public HibernateTransactionManager transactionManager(SessionFactory s) {
+        HibernateTransactionManager txManager = new HibernateTransactionManager();
+        txManager.setSessionFactory(s);
+        return txManager;
+    }
 
 
 

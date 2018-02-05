@@ -5,12 +5,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "status")
 public class Status {
-
 
     private Long idStatus;
     private String typeStatus;
     private Set<Course> courses = new HashSet<>();
+
+    public Status() {
+    }
+
+    public Status(Long idStatus, String typeStatus) {
+        this.idStatus = idStatus;
+        this.typeStatus = typeStatus;
+    }
 
     @Id
     @Column(name = "id_status")

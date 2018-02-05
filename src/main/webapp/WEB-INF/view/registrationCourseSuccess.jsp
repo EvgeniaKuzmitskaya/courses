@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%--
   Created by IntelliJ IDEA.
   User: Evgenia
@@ -12,7 +13,7 @@
 <html>
 <head>
     <title>CoursesAdded</title>
-    <meta charset= "utf-8">
+    <meta charset="UTF-8">
 </head>
 <body>
 <link href="${contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
@@ -27,8 +28,8 @@
         <tr>
             <td class="title lead">
                 List of courses |
-                <a href="${pageContext.request.contextPath}/adminPage">Admin page</a> |
-                <a href="${pageContext.request.contextPath}/courseAdd">Add a new course</a> |
+                <a href="${contextPath}/adminPage">Admin page</a> |
+                <a href="${contextPath}/courseForm">Add a new course</a> |
             </td>
         </tr>
     </table>

@@ -16,11 +16,6 @@ public class StatusServiceImpl implements StatusService {
     StatusDao statusDao;
 
     @Override
-    public Status findByType(String typeStatus) {
-        return this.statusDao.findByType(typeStatus);
-    }
-
-    @Override
     public List<Status> findAll() {
         return this.statusDao.findAll();
     }
@@ -31,10 +26,4 @@ public class StatusServiceImpl implements StatusService {
         return this.statusDao.findById(id);
     }
 
-    @Override
-    @Transactional
-    public List<Status> findAllByCourse(String nameCourse) {
-
-        return this.statusDao.findAllByCourse(nameCourse);
-    }
 }

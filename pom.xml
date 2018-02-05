@@ -16,7 +16,7 @@
         <mysql.version>5.1.44</mysql.version>
         <spring.version>4.3.12.RELEASE</spring.version>
         <springsecurity.version>4.0.4.RELEASE</springsecurity.version>
-        <junit-version>4.11</junit-version>
+        <junit-version>4.12</junit-version>
         <c3p0.version>0.9.5.2</c3p0.version>
         <jsp.version>2.3.1</jsp.version>
         <servlets.version>3.1.0</servlets.version>
@@ -95,7 +95,14 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
 
@@ -132,6 +139,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.4</version>
         </dependency>
 
         <!-- Spring Security -->
@@ -171,6 +183,11 @@
             <artifactId>c3p0</artifactId>
             <version>${c3p0.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.3.12.RELEASE</version>
+        </dependency>
 
 
     </dependencies>
@@ -185,6 +202,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <encoding>UTF-8</encoding>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
